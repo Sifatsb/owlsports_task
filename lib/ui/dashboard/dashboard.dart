@@ -17,6 +17,13 @@ class _DashboardState extends State<Dashboard> {
 
   DateTime timeBackPressed = DateTime.now();
 
+
+  @override
+  void initState() {
+    getLoadData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
