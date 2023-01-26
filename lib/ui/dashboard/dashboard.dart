@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:lottie/lottie.dart';
-import 'package:owlsports_task/model/loan_borrower_model.dart';
 import 'package:http/http.dart' as http;
 import '../../configure/app_colors.dart';
 import '../../configure/app_function.dart';
@@ -24,7 +21,6 @@ class _DashboardState extends State<Dashboard> {
   bool isLoading = false;
 
   var customerData;
-  static const int compoundingFrequency = 12;
 
   @override
   void initState() {
@@ -42,12 +38,9 @@ class _DashboardState extends State<Dashboard> {
         customerData.sort((a, b) => (calculateCompoundInterest(b) - calculateCompoundInterest(a)).toInt());
       });
     } else {
-      print("Error getting data");
+      debugPrint("Error getting data");
     }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +77,6 @@ class _DashboardState extends State<Dashboard> {
                       DataColumn(label: Text("Interest Paid")),
                     ],
                     rows: [
-
                       for (var customer in customerData)
                         DataRow(
                           cells: [
