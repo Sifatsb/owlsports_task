@@ -17,6 +17,14 @@ class _DashboardState extends State<Dashboard> {
 
   DateTime timeBackPressed = DateTime.now();
 
+  var textController = TextEditingController();
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -35,22 +43,73 @@ class _DashboardState extends State<Dashboard> {
       },
       child: SafeArea(
           child: Obx(() => internetController.internet == true ? Scaffold(
-              backgroundColor: Colors.white,
+              backgroundColor: AppColors.secondaryColor,
               appBar: AppBar(
-                backgroundColor: AppColors.secondaryColor,
+                title: const Text('Owl Sports', style: AppStyle.title3,),
+                centerTitle: true,
+                backgroundColor: AppColors.primaryColor,
                 elevation: 3,
               ),
-              body: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: h*0.4,),
-                    const Text('Owl Sports', textAlign: TextAlign.center,)
-                  ],
-                ),
-              )
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: SizedBox(
+                                  width: w*0.65,
+                                  child: AppWidgets().msgInputField(context,
+                                      controller: textController,
+                                      minLine: 1,
+                                      maxLine: 3,
+                                      hintText: 'Type Message',
+                                      icon: AppWidgets().iconButton(context,
+                                          press: (){},
+                                          icon: const Icon(Icons.emoji_emotions_outlined, color: AppColors.secondaryColor,) )),
+
+
+                                ),
+                              ),
+                              Positioned(
+                                right: -10,
+                                bottom: 1,
+                                child: GestureDetector(
+                                  onTap: (){
+
+                                  },
+                                  child: Container(
+                                      height: h*0.05,
+                                      width: h*0.05,
+                                      padding: const EdgeInsets.all(8),
+                                      margin: const EdgeInsets.only(right: 10, bottom: 8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(100),
+                                          color: AppColors.secondaryColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey.withOpacity(.35),
+                                                blurRadius: 2,
+                                                spreadRadius: 1.5,
+                                                offset: const Offset(0, 2.0))
+                                          ]),
+                                      child: const Icon(Icons.send, color: Colors.white,)
+                                  ),
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+
+
           ) : Center(child: Container(height: h, color: Colors.white, child: Lottie.asset('assets/images/no_internet.json'))))),
     );
   }

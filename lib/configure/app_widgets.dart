@@ -191,4 +191,77 @@ class AppWidgets {
       ),
     );
   }
+
+  ///Message Field
+  msgInputField(BuildContext context, {controller, hintText, keyboardType, icon, obscureText, suffixIcon, readOnly, maxLine, minLine}){
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
+    return Container(
+        padding: const EdgeInsets.only(left: 3, right: 3, top: 3, bottom: 1),
+
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(h*0.025),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                offset: Offset(1, 1),
+                blurRadius: 10,
+              ),
+              BoxShadow(
+                color: Colors.transparent,
+                offset: Offset(-1, -1),
+                blurRadius: 10,
+              )
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+
+                Expanded(
+                  child: TextField(
+                    controller: controller,
+                    keyboardType: keyboardType,
+                    obscureText: obscureText ?? false,
+                    readOnly: readOnly ?? false,
+                    textInputAction: TextInputAction.done,
+                    minLines: minLine ?? 1,
+                    maxLines: maxLine ?? 1,
+                    style: const TextStyle(fontSize: 17, letterSpacing: 1),
+                    decoration: InputDecoration(
+                        hintText: hintText,
+                        isCollapsed: true,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        suffixIcon: suffixIcon,
+                        contentPadding: const EdgeInsets.only(top: 5, bottom: 8, left: 7)),
+                  ),
+                ),
+
+                Container(
+                    margin: const EdgeInsets.only(right: 10, bottom: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.white,),
+                    child: icon
+                ),
+
+              ],
+            ),
+          ],
+        ));
+  }
+
+  ///for Simple Icon Button
+  iconButton(BuildContext context, {icon, press, size, color}){
+    return GestureDetector(
+      onTap: press,
+      child: Padding(
+          padding: const EdgeInsets.all(6.0),
+          child: icon),
+    );
+  }
+
 }
