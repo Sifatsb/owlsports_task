@@ -42,6 +42,7 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^3.0.1
   custom_pop_up_menu: ^1.2.4
+  url_launcher:
 
 dev_dependencies:
   flutter_test:
